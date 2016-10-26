@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>date-picker</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="DateTimePicker.css" />
+		<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="DateTimePicker.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#page").append("<div id='dateBox'></div>");
+				$("#dateBox").DateTimePicker(); 
+				$("#page").on("pageshow", function(event) {
+					$(this).append("<div id='dateBox'></div>");
+					$("#dateBox").DateTimePicker(); 
+				})
+				$("#page").on("pagehide", function(event){
+					$("#dateBox").remove();
+				})
+			})
+		</script>
+		<style>
+			html {
+				height: 100%;
+				width: 100%;
+				font-family: 'Heiti SC', 'Microsoft YaHei';
+				overflow: hidden;
+				outline: 0;
+				-webkit-text-size-adjust:none;
+			}
+			p{
+				font-size:1rem;
+				margin:1rem;
+			}
+			input{
+				width:10rem;
+				height:1.2rem;
+				border:solid 1px #333;
+				margin:0;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div data-role="page" id="page">
+			<!------------------------ Date Picker ------------------------>
+			<p>日期 : </p>
+			<input type="text" data-field="date" readonly>
+			<!------------------------ Time Picker ------------------------>
+			<p>时间 : </p>
+			<input type="text" data-field="time" readonly>
+			<!---------------------- DateTime Picker ---------------------->
+			<p>日期和时间 : </p>
+			<input type="text" data-field="datetime" readonly>
+		</div>
+		<script>
+			(function (doc, win) {
+				var docEl = doc.documentElement,
+						resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+						recalc = function () {
+							var clientWidth = docEl.clientWidth;
+							clientWidth> 720 && (clientWidth = 720),
+							clientWidth < 320 && (clientWidth = 320),
+		//                    if (!clientWidth) return;
+							docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+						};
+
+				if (!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+		</script>
+	</body>
+</html>
+	
